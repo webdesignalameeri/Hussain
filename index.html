@@ -230,20 +230,24 @@ noBtn.addEventListener("click", (e) => {
     noBtn.style.animation = "btnShake 0.3s";
     noBtn.addEventListener("animationend", () => noBtn.style.animation = "", {once:true});
 
-    // Move button to a new corner after shake
+    // Move button to a new corner **inside its container**
+    const area = document.getElementById("btnArea");
+    const areaRect = area.getBoundingClientRect();
     const btnWidth = noBtn.offsetWidth;
     const btnHeight = noBtn.offsetHeight;
-    const corners = [
-        {left: 10, top: 10},
-        {left: window.innerWidth - btnWidth - 10, top: 10},
-        {left: 10, top: window.innerHeight - btnHeight - 10},
-        {left: window.innerWidth - btnWidth - 10, top: window.innerHeight - btnHeight - 10},
-        {left: window.innerWidth/2 - btnWidth/2, top: 10},
-        {left: window.innerWidth/2 - btnWidth/2, top: window.innerHeight - btnHeight - 10}
+
+    const positions = [
+        {x: 10, y: 10},
+        {x: areaRect.width - btnWidth - 10, y: 10},
+        {x: 10, y: areaRect.height - btnHeight - 10},
+        {x: areaRect.width - btnWidth - 10, y: areaRect.height - btnHeight - 10},
+        {x: areaRect.width/2 - btnWidth/2, y: 10},
+        {x: areaRect.width/2 - btnWidth/2, y: areaRect.height - btnHeight - 10}
     ];
-    const pos = corners[Math.floor(Math.random() * corners.length)];
-    noBtn.style.left = pos.left + "px";
-    noBtn.style.top = pos.top + "px";
+
+    const pos = positions[Math.floor(Math.random() * positions.length)];
+    noBtn.style.left = pos.x + "px";
+    noBtn.style.top = pos.y + "px";
 });
 </script>
 </body>
